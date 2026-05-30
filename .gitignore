@@ -1,0 +1,22 @@
+# dev-only / source assets — keep repo lean
+.DS_Store
+.gstack/
+.claude/
+yard-brandbook*.html
+yard-brandbook*.pdf
+yard-landing.html
+yard-logo*.html
+yard-logo*.svg
+yard-presentation.html
+yard_v1.html
+yard-p?.svg
+PHOTO-*.jpg
+Снимок*.png
+*Снимок*
+visuals/
+site/
+video_hd_backup/
+AI_промпт_визуализация.md
+ТЗ_*.md
+YARD_Brandbook.pdf
+*.mp4.png

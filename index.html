@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>YARD — Открытие в июле · Семей</title>
+<meta name="description" content="YARD — мультифункциональное лофт-пространство на берегу Иртыша. Семей, Абайская область. Открытие в июле." />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' rx='40' fill='%230A0A0A'/%3E%3Cpolygon fill='%23FAC907' transform='translate(40,30) scale(0.6)' points='22,16 38,4 100,97 162,4 178,16 112,115 112,200 88,200 88,115'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0A0A0A">
+<meta property="og:type" content="website">
+<meta property="og:title" content="YARD — Открытие в июле · Семей">
+<meta property="og:description" content="Мультифункциональное лофт-пространство на берегу Иртыша. Кофе, работа, обучение и маркет.">
+<meta property="og:image" content="og.png">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════════════════════
+   YARD · Cinematic scroll journey (bilingual KZ/RU toggle)
+   animated logo → 3 marketing headlines → "Открытие в июле" → enter
+   Rests on the building frame; entering happens on "Войти".
+   eDesign Interactive · 2026
+   ════════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#070608; --ink:#F5F1EA; --dim:rgba(245,241,234,.62); --faint:rgba(245,241,234,.4);
+  --gold:#FAC907; --gold-deep:#E5B900; --cream:#F5F0E5;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+::selection{background:var(--gold);color:#0a0a0a}
+.mono{font-family:var(--mono)} .serif{font-family:var(--serif)}
+use{fill:currentColor}
+
+/* language toggle visibility */
+.t-kz{display:none}
+body.kz .t-ru{display:none}
+body.kz .t-kz{display:revert}
+
+/* ── LOADER ─────────────────────────────────────────────────── */
+#loader{position:fixed;inset:0;z-index:300;background:var(--bg);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:30px;transition:opacity 1s var(--ease),visibility 1s var(--ease)}
+#loader.done{opacity:0;visibility:hidden}
+#loader .lwm{width:120px;color:var(--gold);opacity:.85}
+#loader .lbar{width:148px;height:1px;background:rgba(245,241,234,.16);position:relative;overflow:hidden}
+#loader .lbar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--gold);
+  box-shadow:0 0 10px rgba(250,201,7,.6);transition:width .45s var(--ease)}
+#loader .lpct{font-family:var(--mono);font-size:10px;letter-spacing:.4em;color:var(--faint);text-transform:uppercase}
+
+/* ── driver / stage ─────────────────────────────────────────── */
+#driver{height:760vh;position:relative;z-index:1}
+#stage{position:sticky;top:0;left:0;width:100vw;height:100vh;height:100svh;overflow:hidden;
+  z-index:2;background:#000}
+.vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;
+  will-change:opacity,transform,filter;background:#000}
+
+/* cinematic grade */
+#grade{position:absolute;inset:0;z-index:10;pointer-events:none;
+  background:linear-gradient(180deg,rgba(7,6,8,.46),rgba(7,6,8,.08) 38%,rgba(7,6,8,.64));mix-blend-mode:multiply}
+#warm{position:absolute;inset:0;z-index:11;pointer-events:none;opacity:0;
+  background:radial-gradient(60% 55% at 50% 60%,rgba(250,201,7,.5),rgba(232,167,92,.18) 35%,transparent 66%);
+  mix-blend-mode:screen}
+#vig{position:absolute;inset:0;z-index:12;pointer-events:none;
+  background:radial-gradient(125% 120% at 50% 46%,transparent 50%,rgba(0,0,0,.66) 100%)}
+#grain{position:absolute;inset:-50%;z-index:13;opacity:.045;pointer-events:none;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 6s steps(6) infinite}
+@keyframes grain{0%,100%{transform:translate(0,0)}25%{transform:translate(-4%,3%)}50%{transform:translate(3%,-4%)}75%{transform:translate(-3%,2%)}}
+
+/* ── top: logo + language toggle ────────────────────────────── */
+.top{position:absolute;top:0;left:0;right:0;z-index:30;display:flex;align-items:center;justify-content:space-between;
+  padding:24px clamp(20px,4vw,44px);pointer-events:none}
+.top .wm{width:72px;color:var(--gold)}
+.lang{pointer-events:auto;display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.12em}
+.lang button{background:none;border:none;color:var(--faint);cursor:pointer;padding:7px 9px;border-radius:20px;
+  transition:color .2s var(--ease);font-family:inherit;font-size:inherit;letter-spacing:inherit}
+.lang button.on{color:var(--gold)}
+.lang button:hover{color:var(--ink)}
+.lang .sep{color:rgba(245,241,234,.3)}
+
+/* ── animated intro logo ────────────────────────────────────── */
+#intro{position:absolute;inset:0;z-index:28;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:30px;text-align:center;pointer-events:none}
+#intro .mk{width:min(56vw,520px);overflow:visible}
+#intro .mk-draw{fill:none;stroke:var(--gold);stroke-width:1.7;stroke-linejoin:round;
+  stroke-dasharray:1;stroke-dashoffset:1;opacity:0}
+#intro .mk-fill{fill:var(--ink);opacity:0;filter:drop-shadow(0 0 46px rgba(250,201,7,.16))}
+#intro .sub{font-family:var(--mono);font-size:clamp(10px,1.3vw,12px);letter-spacing:.6em;text-transform:uppercase;
+  color:var(--dim);text-indent:.6em;opacity:0}
+body.start #intro .mk-draw{animation:logodraw 2.3s var(--ease) .2s forwards, drawfade .7s ease 2.35s forwards}
+body.start #intro .mk-fill{animation:logofill 1.3s ease 1.45s forwards}
+body.start #intro .sub{animation:subin 1.2s var(--ease) 2.75s forwards}
+@keyframes logodraw{from{opacity:1;stroke-dashoffset:1}to{opacity:1;stroke-dashoffset:0}}
+@keyframes drawfade{to{opacity:0}}
+@keyframes logofill{to{opacity:1}}
+@keyframes subin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── marketing headlines (bigger, one language at a time) ───── */
+.mhead{position:absolute;inset:0;z-index:27;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;opacity:0;pointer-events:none;padding:0 26px;will-change:opacity}
+.mhead .h{font-family:var(--serif);font-weight:300;font-size:clamp(44px,8.6vw,132px);line-height:1.0;
+  letter-spacing:-.018em;color:var(--ink);max-width:15ch;text-shadow:0 6px 50px rgba(0,0,0,.6)}
+.mhead .h em{font-style:italic;color:var(--gold)}
+
+/* ── finale "Открытие в июле" ───────────────────────────────── */
+#finale{position:absolute;inset:0;z-index:29;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:14px;text-align:center;opacity:0;pointer-events:none;padding:0 24px}
+#finale .eyebrow{font-family:var(--mono);font-size:clamp(10px,1.3vw,12px);letter-spacing:.42em;
+  text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px}
+#finale .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px rgba(250,201,7,.7);
+  animation:blink 2s var(--ease) infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+#finale h1{font-family:var(--serif);font-weight:300;font-size:clamp(54px,10.5vw,156px);line-height:.9;
+  letter-spacing:-.022em;text-shadow:0 6px 54px rgba(0,0,0,.55)}
+#finale h1 em{font-style:italic;color:var(--gold)}
+#finale .addr{margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+#finale .contacts{margin-top:12px;pointer-events:auto;display:inline-flex;gap:12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--gold)}
+#finale .contacts a{color:var(--gold);transition:opacity .2s var(--ease)}
+#finale .contacts a:hover{opacity:.65}
+#finale .contacts span{color:var(--faint)}
+#finale .enter{margin-top:28px;pointer-events:auto;display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#1a1206;
+  background:var(--gold);padding:15px 30px;border-radius:40px;cursor:pointer;border:none;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+#finale .enter:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(250,201,7,.34)}
+
+/* scroll hint + progress */
+#hint{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);z-index:30;display:flex;flex-direction:column;
+  align-items:center;gap:11px;font-family:var(--mono);font-size:9px;letter-spacing:.38em;text-transform:uppercase;
+  color:var(--faint);pointer-events:none}
+#hint .m{width:20px;height:32px;border:1px solid rgba(245,241,234,.28);border-radius:11px;position:relative}
+#hint .m::after{content:'';position:absolute;left:50%;top:6px;width:3px;height:7px;border-radius:2px;background:var(--gold);
+  transform:translateX(-50%);animation:wheel 1.9s var(--ease) infinite}
+@keyframes wheel{0%{opacity:0;transform:translate(-50%,0)}30%,70%{opacity:1}100%{opacity:0;transform:translate(-50%,11px)}}
+#rail{position:absolute;right:16px;top:50%;transform:translateY(-50%);z-index:30;width:2px;height:120px;
+  background:rgba(245,241,234,.12);border-radius:2px}
+#rail i{position:absolute;left:0;top:0;width:100%;height:0;background:var(--gold);border-radius:2px;
+  box-shadow:0 0 10px rgba(250,201,7,.6)}
+@media (prefers-reduced-motion:reduce){#grain,#hint .m::after{animation:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="yard-mark" overflow="visible"><path pathLength="1" fill-rule="evenodd" clip-rule="evenodd" d="M527,38 L526,39 L526,40 L525,41 L525,42 L524,43 L524,44 L523,45 L523,46 L522,47 L522,48 L521,49 L521,50 L520,51 L520,53 L519,54 L519,55 L518,56 L518,57 L517,58 L517,60 L516,61 L516,62 L515,63 L515,64 L514,65 L514,66 L513,67 L513,68 L512,69 L512,70 L511,71 L511,73 L510,74 L510,75 L509,76 L509,77 L508,78 L508,79 L507,80 L507,81 L506,82 L506,83 L505,84 L505,86 L504,87 L504,88 L503,89 L503,90 L502,91 L502,92 L501,93 L501,94 L500,95 L500,96 L499,97 L499,98 L498,99 L498,101 L497,102 L497,103 L496,104 L496,105 L495,106 L495,107 L494,108 L494,109 L493,110 L493,111 L492,112 L492,114 L491,115 L491,116 L490,117 L490,118 L489,119 L489,120 L488,121 L488,122 L487,123 L487,124 L486,125 L486,127 L485,128 L485,129 L484,130 L484,131 L483,132 L483,133 L482,134 L482,135 L481,136 L481,137 L480,138 L480,139 L479,140 L479,142 L478,143 L478,144 L477,145 L477,146 L476,147 L476,148 L475,149 L475,150 L474,151 L474,152 L473,153 L473,154 L472,155 L472,156 L471,157 L471,158 L470,159 L470,161 L469,162 L469,163 L468,164 L468,165 L467,166 L467,167 L466,168 L466,169 L465,170 L465,171 L464,172 L464,173 L463,174 L463,176 L462,177 L462,178 L461,179 L461,180 L460,181 L460,182 L459,183 L459,184 L458,185 L458,186 L457,187 L457,189 L456,190 L456,191 L455,192 L455,193 L454,194 L454,195 L453,196 L453,197 L452,198 L452,199 L451,200 L451,201 L450,202 L450,203 L449,204 L449,206 L448,207 L448,208 L447,209 L447,210 L446,211 L446,212 L445,213 L445,214 L444,215 L444,216 L443,217 L443,218 L442,219 L442,220 L441,221 L441,222 L440,223 L440,224 L465,224 L466,223 L466,222 L467,221 L467,219 L468,218 L468,217 L469,216 L469,215 L470,214 L470,213 L471,212 L471,211 L472,210 L472,209 L473,208 L473,206 L474,205 L474,204 L475,203 L475,202 L476,201 L476,200 L477,199 L477,198 L478,197 L478,196 L479,195 L479,194 L480,193 L480,191 L481,190 L481,189 L482,188 L482,187 L483,186 L483,185 L484,184 L484,183 L485,182 L485,181 L486,180 L486,179 L487,178 L487,177 L488,176 L488,174 L489,173 L489,172 L490,171 L490,170 L491,169 L491,168 L492,167 L492,166 L493,165 L493,164 L494,163 L494,162 L495,161 L495,160 L496,159 L496,157 L497,156 L497,155 L498,154 L498,153 L499,152 L499,151 L500,150 L500,149 L501,148 L501,147 L502,146 L502,144 L503,143 L503,142 L504,141 L504,140 L505,139 L505,138 L506,137 L506,136 L507,135 L507,134 L508,133 L508,132 L509,131 L509,130 L510,129 L510,128 L511,127 L511,126 L512,125 L512,123 L513,122 L513,121 L514,120 L514,119 L515,118 L515,117 L516,116 L516,115 L517,114 L517,113 L518,112 L518,111 L519,110 L519,108 L520,107 L520,106 L521,105 L521,104 L522,103 L522,102 L523,101 L523,100 L524,99 L524,98 L525,97 L525,96 L526,95 L526,94 L527,93 L528,94 L528,96 L529,97 L529,98 L530,99 L530,100 L531,101 L531,102 L532,103 L532,104 L533,105 L533,106 L534,107 L534,108 L535,109 L535,111 L536,112 L536,113 L537,114 L537,115 L538,116 L538,117 L539,118 L539,119 L540,120 L540,121 L541,122 L541,123 L542,124 L542,125 L543,126 L543,128 L544,129 L544,130 L545,131 L545,132 L546,133 L546,134 L547,135 L547,136 L548,137 L548,138 L549,139 L549,140 L550,141 L550,142 L551,143 L551,145 L552,146 L552,147 L553,148 L553,149 L554,150 L554,151 L555,152 L555,153 L556,154 L556,155 L557,156 L557,158 L558,159 L558,160 L559,161 L559,162 L560,163 L560,164 L561,165 L561,166 L562,167 L562,168 L563,169 L563,170 L564,171 L564,173 L565,174 L565,175 L566,176 L566,177 L567,178 L567,179 L568,180 L568,181 L569,182 L569,183 L570,184 L570,185 L571,186 L571,187 L572,188 L572,189 L573,190 L573,191 L574,192 L574,194 L575,195 L575,196 L576,197 L576,198 L577,199 L577,200 L578,201 L578,202 L579,203 L579,204 L580,205 L580,206 L581,207 L581,208 L582,209 L582,210 L583,211 L583,212 L584,213 L584,214 L585,215 L585,217 L586,218 L586,219 L587,220 L587,221 L588,222 L588,223 L589,224 L613,224 L613,222 L612,221 L612,220 L611,219 L611,218 L610,217 L610,216 L609,215 L609,213 L608,212 L608,211 L607,210 L607,209 L606,208 L606,207 L605,206 L605,205 L604,204 L604,203 L603,202 L603,201 L602,200 L602,199 L601,198 L601,196 L600,195 L600,194 L599,193 L599,192 L598,191 L598,190 L597,189 L597,188 L596,187 L596,186 L595,185 L595,184 L594,183 L594,182 L593,181 L593,179 L592,178 L592,177 L591,176 L591,175 L590,174 L590,173 L589,172 L589,171 L588,170 L588,169 L587,168 L587,167 L586,166 L586,165 L585,164 L585,163 L584,162 L584,160 L583,159 L583,158 L582,157 L582,156 L581,155 L581,154 L580,153 L580,152 L579,151 L579,150 L578,149 L578,148 L577,147 L577,145 L576,144 L576,143 L575,142 L575,141 L574,140 L574,139 L573,138 L573,137 L572,136 L572,135 L571,134 L571,133 L570,132 L570,131 L569,130 L569,129 L568,128 L568,126 L567,125 L567,124 L566,123 L566,122 L565,121 L565,120 L564,119 L564,117 L563,116 L563,115 L562,114 L562,113 L561,112 L561,111 L560,110 L560,109 L559,108 L559,107 L558,106 L558,104 L557,103 L557,102 L556,101 L556,100 L555,99 L555,98 L554,97 L554,96 L553,95 L553,94 L552,93 L552,91 L551,90 L551,89 L550,88 L550,87 L549,86 L549,85 L548,84 L548,83 L547,82 L547,81 L546,80 L546,79 L545,78 L545,77 L544,76 L544,74 L543,73 L543,72 L542,71 L542,70 L541,69 L541,68 L540,67 L540,65 L539,64 L539,63 L538,62 L538,61 L537,60 L537,59 L536,58 L536,57 L535,56 L535,55 L534,54 L534,52 L533,51 L533,50 L532,49 L532,48 L531,47 L531,46 L530,45 L530,44 L529,43 L529,42 L528,41 L528,39 Z M241,41 L240,42 L243,45 L243,46 L245,48 L245,49 L249,53 L249,54 L252,57 L252,58 L255,61 L255,62 L259,66 L259,67 L261,69 L261,70 L265,74 L265,75 L268,78 L268,79 L271,82 L271,83 L274,86 L274,87 L277,90 L277,91 L280,94 L280,95 L283,98 L283,99 L286,102 L286,103 L289,106 L289,107 L292,110 L292,111 L295,114 L295,115 L298,118 L298,119 L301,122 L301,123 L304,126 L304,127 L307,130 L307,131 L310,134 L310,135 L312,137 L312,138 L316,142 L316,181 L318,181 L318,180 L321,177 L321,176 L325,172 L325,171 L328,168 L328,167 L333,162 L333,161 L336,158 L336,157 L340,153 L340,152 L344,148 L344,147 L347,144 L347,142 L345,140 L345,139 L342,136 L342,135 L339,132 L339,131 L336,128 L336,127 L333,124 L333,123 L330,120 L330,119 L327,116 L327,115 L324,112 L324,111 L321,108 L321,107 L318,104 L318,103 L316,101 L316,100 L313,97 L313,96 L310,93 L310,92 L306,88 L306,87 L303,84 L303,83 L301,81 L301,80 L298,77 L298,76 L295,73 L295,72 L292,69 L292,68 L289,65 L289,64 L287,62 L287,61 L284,58 L284,57 L281,54 L281,53 L278,50 L278,49 L275,46 L275,45 L273,43 L273,42 L272,41 Z M348,173 L347,173 L345,175 L345,176 L341,180 L341,181 L338,184 L338,185 L333,190 L333,191 L330,194 L330,195 L325,200 L325,201 L322,204 L322,205 L317,210 L317,211 L316,212 L316,224 L348,224 Z M425,41 L394,41 L393,42 L393,43 L390,46 L390,47 L387,50 L387,51 L384,54 L384,55 L381,58 L381,59 L378,62 L378,63 L375,66 L375,67 L372,70 L372,71 L369,74 L369,75 L366,78 L366,79 L363,82 L363,83 L360,86 L360,87 L357,90 L357,91 L354,94 L354,95 L351,98 L351,99 L348,102 L348,104 L377,104 L379,102 L379,101 L383,97 L383,96 L387,92 L387,91 L391,87 L391,86 L394,83 L394,82 L398,78 L398,77 L401,74 L401,73 L405,69 L405,68 L408,65 L408,64 L411,61 L411,60 L415,56 L415,55 L418,52 L418,51 L422,47 L422,46 L425,43 Z M677,41 L676,42 L676,224 L698,224 L698,62 L699,61 L700,62 L756,62 L757,63 L760,63 L761,64 L762,64 L763,65 L765,65 L767,67 L768,67 L769,68 L770,68 L773,71 L774,71 L777,74 L777,75 L781,79 L781,80 L782,81 L782,82 L783,83 L783,84 L784,85 L784,87 L785,88 L785,89 L786,90 L786,92 L787,93 L787,112 L786,113 L786,116 L785,117 L785,119 L784,120 L784,121 L783,122 L783,123 L782,124 L782,125 L780,127 L780,128 L777,131 L777,132 L773,136 L772,136 L769,139 L768,139 L767,140 L766,140 L764,142 L763,142 L762,143 L760,143 L759,144 L757,144 L756,145 L750,145 L749,146 L735,146 L735,147 L736,148 L736,149 L738,151 L738,152 L740,154 L740,155 L741,156 L741,157 L743,159 L743,160 L744,161 L744,162 L746,164 L746,165 L748,167 L748,168 L749,169 L749,170 L751,172 L751,173 L752,174 L752,175 L754,177 L754,178 L756,180 L756,181 L757,182 L757,183 L759,185 L759,186 L761,188 L761,189 L762,190 L762,191 L764,193 L764,194 L765,195 L765,196 L767,198 L767,199 L768,200 L768,201 L770,203 L770,204 L771,205 L771,206 L773,208 L773,209 L775,211 L775,212 L776,213 L776,214 L778,216 L778,217 L780,219 L780,220 L781,221 L781,222 L783,224 L809,224 L809,223 L808,222 L808,221 L806,219 L806,218 L805,217 L805,216 L803,214 L803,213 L801,211 L801,210 L800,209 L800,208 L798,206 L798,205 L797,204 L797,203 L795,201 L795,200 L793,198 L793,197 L792,196 L792,195 L790,193 L790,192 L789,191 L789,190 L787,188 L787,187 L785,185 L785,184 L784,183 L784,182 L782,180 L782,179 L781,178 L781,177 L779,175 L779,174 L777,172 L777,171 L776,170 L776,169 L774,167 L774,166 L773,165 L773,164 L771,162 L773,160 L774,160 L775,159 L776,159 L777,158 L778,158 L779,157 L780,157 L781,156 L782,156 L784,154 L785,154 L788,151 L789,151 L794,146 L794,145 L798,141 L798,140 L800,138 L800,137 L801,136 L801,135 L802,134 L802,133 L803,132 L803,131 L804,130 L804,129 L805,128 L805,126 L806,125 L806,123 L807,122 L807,119 L808,118 L808,113 L809,112 L809,92 L808,91 L808,87 L807,86 L807,84 L806,83 L806,81 L805,80 L805,78 L804,77 L804,76 L803,75 L803,74 L802,73 L802,72 L801,71 L801,70 L799,68 L799,67 L797,65 L797,64 L786,53 L785,53 L783,51 L782,51 L781,50 L780,50 L778,48 L777,48 L776,47 L775,47 L774,46 L772,46 L771,45 L770,45 L769,44 L767,44 L766,43 L763,43 L762,42 L756,42 L755,41 Z M881,41 L880,42 L880,62 L881,63 L954,63 L955,64 L960,64 L961,65 L964,65 L965,66 L967,66 L968,67 L970,67 L971,68 L972,68 L973,69 L974,69 L975,70 L976,70 L977,71 L978,71 L979,72 L980,72 L981,73 L982,73 L984,75 L985,75 L989,79 L990,79 L999,88 L999,89 L1002,92 L1002,93 L1004,95 L1004,96 L1006,98 L1006,99 L1007,100 L1007,101 L1008,102 L1008,103 L1009,104 L1009,105 L1010,106 L1010,108 L1011,109 L1011,110 L1012,111 L1012,114 L1013,115 L1013,118 L1014,119 L1014,123 L1015,124 L1015,142 L1014,143 L1014,148 L1013,149 L1013,152 L1012,153 L1012,155 L1011,156 L1011,158 L1010,159 L1010,160 L1009,161 L1009,162 L1008,163 L1008,164 L1007,165 L1007,166 L1006,167 L1006,168 L1005,169 L1005,170 L1003,172 L1003,173 L1001,175 L1001,176 L988,189 L987,189 L985,191 L984,191 L982,193 L981,193 L979,195 L978,195 L977,196 L976,196 L975,197 L973,197 L972,198 L971,198 L970,199 L968,199 L967,200 L965,200 L964,201 L961,201 L960,202 L956,202 L955,203 L926,203 L925,204 L915,204 L914,203 L899,203 L898,204 L893,204 L892,203 L884,203 L883,204 L880,204 L880,214 L881,215 L880,216 L881,217 L880,218 L880,223 L881,224 L957,224 L958,223 L963,223 L964,222 L968,222 L969,221 L972,221 L973,220 L975,220 L976,219 L977,219 L978,218 L980,218 L981,217 L983,217 L984,216 L985,216 L986,215 L987,215 L988,214 L989,214 L991,212 L992,212 L993,211 L994,211 L996,209 L997,209 L998,208 L999,208 L1002,205 L1003,205 L1017,191 L1017,190 L1020,187 L1020,186 L1022,184 L1022,183 L1024,181 L1024,180 L1025,179 L1025,178 L1026,177 L1026,176 L1027,175 L1027,174 L1028,173 L1028,172 L1029,171 L1029,170 L1030,169 L1030,167 L1031,166 L1031,165 L1032,164 L1032,162 L1033,161 L1033,159 L1034,158 L1034,154 L1035,153 L1035,149 L1036,148 L1036,140 L1037,139 L1037,129 L1036,128 L1036,120 L1035,119 L1035,114 L1034,113 L1034,110 L1033,109 L1033,106 L1032,105 L1032,103 L1031,102 L1031,101 L1030,100 L1030,98 L1029,97 L1029,96 L1028,95 L1028,93 L1027,92 L1027,91 L1026,90 L1026,89 L1025,88 L1025,87 L1023,85 L1023,84 L1021,82 L1021,81 L1019,79 L1019,78 L1015,74 L1015,73 L1004,62 L1003,62 L1000,59 L999,59 L996,56 L995,56 L994,55 L993,55 L991,53 L990,53 L989,52 L988,52 L987,51 L986,51 L985,50 L984,50 L983,49 L982,49 L981,48 L979,48 L978,47 L977,47 L976,46 L974,46 L973,45 L971,45 L970,44 L967,44 L966,43 L962,43 L961,42 L954,42 L953,41 Z"/></symbol>
+</svg>
+
+<!-- LOADER -->
+<div id="loader">
+  <svg class="lwm" viewBox="225 30 825 200"><use href="#yard-mark"/></svg>
+  <div class="lbar"><i id="lbar-i"></i></div>
+  <div class="lpct"><span id="lpct">00</span> · <span class="t-ru">ЗАГРУЗКА</span><span class="t-kz">ЖҮКТЕЛУДЕ</span></div>
+</div>
+
+<div id="driver">
+  <div id="stage">
+    <video class="vid" id="v0" src="video/01_earth.mp4"    muted playsinline preload="auto" disablepictureinpicture></video>
+    <video class="vid" id="v1" src="video/02_descent.mp4"  muted playsinline preload="auto" disablepictureinpicture></video>
+    <video class="vid" id="v2" src="video/03_semey.mp4"    muted playsinline preload="auto" disablepictureinpicture></video>
+    <video class="vid" id="v3" src="video/04_building.mp4" muted playsinline preload="auto" disablepictureinpicture></video>
+
+    <div id="grade"></div>
+    <div id="warm"></div>
+    <div id="vig"></div>
+    <div id="grain"></div>
+
+    <!-- top: logo + language -->
+    <div class="top">
+      <svg class="wm" viewBox="225 30 825 200"><use href="#yard-mark"/></svg>
+      <div class="lang" id="lang">
+        <button data-lang="kz">ҚАЗ</button><span class="sep">·</span><button data-lang="ru" class="on">РУС</button>
+      </div>
+    </div>
+
+    <!-- animated intro logo -->
+    <div id="intro">
+      <svg class="mk" viewBox="225 30 825 200">
+        <use href="#yard-mark" class="mk-draw"/>
+        <use href="#yard-mark" class="mk-fill"/>
+      </svg>
+      <div class="sub">Семей · Қазақстан</div>
+    </div>
+
+    <!-- 3 marketing headlines (toggle RU/KZ) -->
+    <div class="mhead" id="h1">
+      <div class="h t-ru">Пространство, которого <em>ждал</em> город</div>
+      <div class="h t-kz">Қала <em>күткен</em> кеңістік</div>
+    </div>
+    <div class="mhead" id="h2">
+      <div class="h t-ru">Кофе. Работа. Обучение. <em>Маркет.</em></div>
+      <div class="h t-kz">Кофе. Жұмыс. Оқу. <em>Маркет.</em></div>
+    </div>
+    <div class="mhead" id="h3">
+      <div class="h t-ru">Всё лучшее — под <em>одной крышей</em></div>
+      <div class="h t-kz">Ең жақсысы — <em>бір шаңырақ</em> астында</div>
+    </div>
+
+    <!-- finale -->
+    <div id="finale">
+      <div class="eyebrow"><span class="dot"></span>YARD · Семей</div>
+      <h1 class="t-ru">Открытие <em>в июле</em></h1>
+      <h1 class="t-kz"><em>Шілдеде</em> ашыламыз</h1>
+      <div class="addr">ул. К. Мухамедханова 36г · Семей</div>
+      <button class="enter" id="enter"><span class="t-ru">Войти&nbsp;→</span><span class="t-kz">Кіру&nbsp;→</span></button>
+    </div>
+
+    <div id="hint"><div class="m"></div><span class="t-ru">Прокрутите</span><span class="t-kz">Айналдырыңыз</span></div>
+    <div id="rail"><i id="rail-i"></i></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+  const clamp=(v,a,b)=>v<a?a:v>b?b:v;
+  const lerp=(a,b,t)=>a+(b-a)*t;
+  const inv=(v,a,b)=>clamp((v-a)/(b-a),0,1);
+  const pulse=(p,a,b,c,d)=>Math.min(inv(p,a,b),1-inv(p,c,d));
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- language ---- */
+  const LANG_KEY='yard-lang';
+  function setLang(l){document.body.classList.toggle('kz',l==='kz');
+    document.documentElement.lang=l;
+    $$('#lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));
+    try{localStorage.setItem(LANG_KEY,l);}catch(e){}}
+  $$('#lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+  let savedLang='ru';try{savedLang=localStorage.getItem(LANG_KEY)||'ru';}catch(e){}
+  setLang(savedLang);
+
+  const vids=[$('#v0'),$('#v1'),$('#v2'),$('#v3')];
+  const driver=$('#driver'),intro=$('#intro'),finale=$('#finale'),hint=$('#hint'),
+        warm=$('#warm'),railI=$('#rail-i'),loader=$('#loader'),lbarI=$('#lbar-i'),lpct=$('#lpct'),
+        h1=$('#h1'),h2=$('#h2'),h3=$('#h3');
+
+  const SEG=[
+    {vis:[0.00,0.05,0.26,0.31], scrub:[0.04,0.28]},  // EARTH
+    {vis:[0.26,0.31,0.50,0.55], scrub:[0.30,0.52]},  // KAZAKHSTAN
+    {vis:[0.50,0.55,0.72,0.77], scrub:[0.54,0.74]},  // SEMEY
+    {vis:[0.72,0.77,1.01,1.02], scrub:[0.77,0.96]},  // BUILDING — rests here
+  ];
+
+  /* ---- loader ---- */
+  let ready=0;const need=vids.length;const t0=Date.now();let prog=0;
+  const fakeT=setInterval(()=>{prog=Math.min(prog+Math.random()*7,Math.max(prog,ready/need*100-4));paint(prog);},140);
+  function paint(pc){lbarI.style.width=pc+'%';lpct.textContent=String(Math.floor(pc)).padStart(2,'0');}
+  vids.forEach(v=>{
+    const onready=()=>{v.removeEventListener('loadeddata',onready);ready++;
+      v.play().then(()=>v.pause()).catch(()=>{});if(ready>=need)finish();};
+    v.addEventListener('loadeddata',onready);
+    v.addEventListener('error',()=>{ready++;if(ready>=need)finish();});
+  });
+  let finished=false;
+  function finish(){if(finished)return;finished=true;clearInterval(fakeT);
+    const wait=Math.max(0,500-(Date.now()-t0));
+    setTimeout(()=>{paint(100);setTimeout(()=>{loader.classList.add('done');document.body.classList.add('start');},420);},wait);}
+  setTimeout(finish,9000);
+
+  function seekTo(v,t){if(v.readyState<2||v.seeking)return;if(Math.abs(v.currentTime-t)>0.045){try{v.currentTime=t;}catch(e){}}}
+
+  /* ---- render ---- */
+  let target=0,cur=0,bldState=0,bldTimer=null;
+  function render(){
+    const p=cur;
+    intro.style.opacity=1-inv(p,0.02,0.07);
+    hint.style.opacity=1-inv(p,0.01,0.06);
+
+    for(let i=0;i<4;i++){
+      const s=SEG[i],v=vids[i];
+      const op=Math.min(inv(p,s.vis[0],s.vis[1]),1-inv(p,s.vis[2],s.vis[3]));
+      v.style.opacity=op.toFixed(3);
+      if(op<=0.012){v.style.visibility='hidden';continue;}
+      v.style.visibility='visible';
+      const local=inv(p,s.scrub[0],s.scrub[1]);
+      const dur=v.duration||10;
+      if(i===3){
+        if(p>=0.965 && !reduce){              /* finale: film breathes ~2s, then freezes */
+          if(bldState===0){bldState=1;v.play().catch(()=>{});
+            bldTimer=setTimeout(()=>{try{v.pause();}catch(e){}bldState=2;},2000);}
+        }else{
+          if(bldState!==0){bldState=0;if(bldTimer){clearTimeout(bldTimer);bldTimer=null;}}
+          if(!reduce) seekTo(v,clamp(lerp(1.0,3.4,local),0,dur-0.05));
+        }
+      }else{
+        if(!reduce) seekTo(v,clamp(local*dur,0,dur-0.05));
+      }
+      v.style.transformOrigin='50% 50%';
+      v.style.transform=`scale(${lerp(1.0,1.06,local).toFixed(3)})`;
+    }
+
+    h1.style.opacity=pulse(p,0.07,0.12,0.20,0.25).toFixed(3);
+    h2.style.opacity=pulse(p,0.33,0.38,0.46,0.50).toFixed(3);
+    h3.style.opacity=pulse(p,0.57,0.62,0.69,0.73).toFixed(3);
+    finale.style.opacity=inv(p,0.80,0.88).toFixed(3);
+
+    railI.style.height=(p*100).toFixed(1)+'%';
+  }
+
+  function loop(){
+    cur+=(target-cur)*(reduce?1:0.075);
+    if(Math.abs(target-cur)<0.0002)cur=target;
+    render();
+    requestAnimationFrame(loop);
+  }
+  function onScroll(){const max=driver.offsetHeight-innerHeight;target=clamp(scrollY/max,0,1);}
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll);
+  onScroll();render();requestAnimationFrame(loop);
+
+  /* enter the doors — on click only */
+  $('#enter').addEventListener('click',()=>{
+    warm.style.transition='opacity .6s ease';warm.style.opacity=1;
+    document.body.style.transition='opacity .7s ease';
+    setTimeout(()=>{location.href='inside.html';},650);
+  });
+})();
+</script>
+</body>
+</html>
